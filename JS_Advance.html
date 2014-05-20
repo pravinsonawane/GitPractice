@@ -1,0 +1,215 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<head>
+<title>JS Advance</title>
+<script type="text/javascript">
+		// Error Handling... Explained in JS_Basics.html
+		
+		//JS Popup boxes 
+		function showAlert(){
+<<<<<<< Updated upstream
+			alert("Hello");
+
+=======
+			alert("Hello ***** ------");
+>>>>>>> Stashed changes
+		}
+		
+		function showConfirmBox(){
+			var x;
+			var r=confirm("Press a button!");
+			if (r==true)
+				x="You pressed OK!";
+			else
+				x="You pressed Cancel!";
+			document.getElementById("demo").innerHTML=x;
+		}
+		
+		function showPromptBox(){
+			var x;
+			var person=prompt("Please enter your name","ABC");
+			if (person!=null)
+			{
+				x="Hello " + person;
+				document.getElementById("demo").innerHTML=x;
+			}
+		}
+		
+		/*
+			Objects
+			In JavaScript almost everything is an object. Even primitype datatypes (exept null and undefined) can be treated as objects.
+		*/
+				
+		function person(fname,lname,city){
+			this._fname = fname;
+			this._lname = lname;
+			this._city = city;
+			
+			this.changeName = function(clname){
+				this._lname = clname;
+			}
+		}
+		
+			
+		function createPerson(){
+			//person.age();
+			var personObj = new person("Pravin","Sonawane","Malegaon");
+			//personObj.age();
+			console.log(personObj._fname+" "+personObj._lname+" from "+personObj._city);
+			personObj.changeName("Patil");
+			console.log(personObj._fname+" "+personObj._lname+" from "+personObj._city);
+			
+			personObj.newField = "Testing...";
+			console.log("Get new field value "+personObj.newField);
+			
+			var personObj1 = new person("Pravin","Sonawane","Malegaon");
+			console.log("Get new field value "+personObj1.newField);
+			console.log("------------Loop--------------");
+			for(x in personObj1){
+				//console.log(x);
+				console.log(personObj[x]);
+			}
+		}
+		
+		//JavaScript is prototype based, not class based.
+		
+		//prototype  - Allows you to add properties and methods to an object
+		//Prototype is a global object constructor which is available for all JavaScript objects.
+			
+		Number.prototype.half = function()
+		{
+			this.myProperty = this.valueOf()/2;
+		}
+		
+		function halfTheNumber(){
+			var num = new Number();
+			num.half();
+			console.log(num.myProperty);
+			
+			var num1 = new Number(60);
+			num1.half();
+			console.log(num1.myProperty);
+		}
+		
+		// Static Variables and Methods
+		
+		function MyString(){};
+		
+		MyString.MAX_LENGTH = 50;
+		MyString.getLength = function(){
+			console.log("You r invoking getLength method");
+		}
+		
+		MyString.prototype.alert = function() {
+			alert('I am alert only..');
+		};
+
+		function showStaticData(){
+			console.log(MyString.MAX_LENGTH);
+			MyString.getLength();
+						
+			var str = new MyString();
+			console.log(str.MAX_LENGTH);
+			str.alert();
+
+			MyString.alert();
+			
+		}
+		
+		
+		
+		/*  Numbers are 64 bits floating point
+			JavaScript numbers are always stored as double precision floating point numbers.
+			0-51 bits for number, 52-62 for exponent , 63 for sign 
+		*/
+		
+		function checkDigits(){
+			var num = 1234567890123456; // Accurate upto 15 digits 
+			console.log(num);
+			var num1 = 12345678901234511;
+			console.log(num1);
+		}
+		
+		//NaN - not a number
+		function checkNumber(){
+			var num = document.getElementById("num_id").value;
+			if(isNaN(num))
+				console.log("It is not a number");
+			else
+				console.log("It is number");
+		}
+		
+		//Numbers can be number
+		function checkType(){
+			var x = 123;
+			var y = new Number(123);
+			console.log("Type of x is = "+typeof(x)) 
+			console.log("Type of y is = "+typeof(y)) 
+		}
+		
+		// Properties and Methods of Number
+		function usePropAndMethods(){
+			var num = new Number(12.5678);
+			console.log(Number.MAX_VALUE);
+			console.log(Number.MIN_VALUE);
+		    console.log(Number.NEGATIVE_INFINITY);
+			console.log(Number.POSITIVE_INFINITY);
+			console.log(Number.NaN);
+			
+			console.log(num.valueOf());
+			console.log(num.toFixed(2));
+		}
+		
+		// String manipulation
+		
+		function stringManipulation(){
+			var str = "Hello, How are you? what are you doing";
+			console.log(str.indexOf("are"));
+			console.log(str.lastIndexOf("are"));
+			console.log(str.match("are"));	
+			str.replace("you","they");
+			console.log("After replace "+str);
+			
+			var str="Mr. Blue has a blue house";
+			//document.write(str.search(/blue/i));
+
+			var str="Hello world!";
+			var n=str.slice(1,5); 
+
+			var str="How are you doing today?";
+			var n=str.split(" "); 
+
+			var str="Hello world!";
+			var n=str.substr(2,3) 
+
+			var str="Hello world!";
+			str.substring(3)
+			str.substring(3,7)
+			
+			
+		}
+				
+</script>
+</head>
+<body >
+	<p id="demo"></p>
+	<input type="button" value="ALERT" onclick="showAlert();" />
+	<input type="button" value="CONFIRM_BOX" onclick="showConfirmBox();" />
+	<input type="button" value="PROMPT_BOX" onclick="showPromptBox();" /></br></br>
+	
+	<input type="button" value="Create Person" onclick="createPerson();" /></br></br>
+	
+	<input type="button" value="STATIC DATA" onclick="showStaticData()" /></br></br>
+	
+	<input type="button" value="Max JS value" onclick="checkDigits();" /></br></br>
+	
+	<input type="text" id="num_id"></input>
+	<input type="button" value="IS NUMBER?" onclick="checkNumber();" /></br></br>
+	<input type="button" value="CHECK TYPE" onclick="checkType();" /></br></br>
+	
+	<input type="button" value="NUM PRO AND METHODS" onclick="usePropAndMethods();" /></br></br>
+	<input type="button" value="Half The Number" onclick="halfTheNumber();" /></br></br>
+	
+	<input type="button" value="String Manipulation" onclick="stringManipulation();" /></br></br>
+	
+</body>
+</html>

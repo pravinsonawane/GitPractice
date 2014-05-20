@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<head>
+<title>JS Basics</title>
+<script type="text/javascript">
+		//2D arrays
+		function show2DArray(){
+			var myArr = [[1,2],[3,4],[5,6]];
+			console.log("Output value:"+myArr[0][1]);
+			
+			// Another way
+			var empArr = new Array(2);
+			empArr[0] = new Array("ABC","XYZ");
+			empArr[1] = new Array("DEF","UVW");
+			
+			console.log("empArr value--"+empArr[0][1]);
+		}
+		
+		//Error Handling...
+		onerror=handleErr;
+		var txt;
+		function handleErr(msg,url,l)
+		{
+			txt="There was an error on this page.\n\n";
+			txt+="Error: " + msg + "\n";
+			txt+="URL: " + url + "\n";
+			txt+="Line: " + l + "\n\n";
+			txt+="Click OK to continue.\n\n";
+			alert(txt);
+			return true;
+		}
+
+		function message(){
+			try
+			{
+				show("Hello...");
+				alert("I am here...");
+			}
+			catch(err)
+			{
+			  txt="There was an error on this page.\n\n";
+			  txt+="Error description: " + err.message + "\n\n";
+			  txt+="Click OK to continue.\n\n";
+			  alert(txt);
+			}
+			alert("Reached...after catch");			
+		}
+		function test(){
+			alert("Function called from catch block ");
+		}
+		function myFunction()
+		{
+			try
+			{
+				var x=document.getElementById("demo").value;
+				if(x=="")    throw "empty";
+				if(isNaN(x)) throw "not a number";
+				if(x>10)     throw "too high";
+				if(x<5)      throw "too low";
+				document.getElementById("mess").innerHTML = "";
+			}
+			catch(err)
+			{
+				var y=document.getElementById("mess");
+				y.innerHTML="Error: " + err + ".";
+				test();
+			}
+		}
+		
+		
+		
+		//JS HTML DOM [Document Object Model] 
+		/*	
+			Finding HTML elements by id
+			Finding HTML elements by tag name
+			Finding HTML elements by class name
+		*/
+		function changePara(newText){
+			//document.getElementById("demo_id").innerHTML=newText;
+			//document.getElementsByTagName("p").innerHTML = newText;
+			var pData = document.getElementsByTagName("p");
+			//pData[2].innerHTML= newText;
+			for(var i=0; i<pData.length;i++)
+			{
+				if(pData[i].id == "demo_id")
+					pData[i].innerHTML= newText;
+			}
+		}
+		
+		function changeAttr(){
+			document.getElementById("btn").value = "Changed.."
+		}
+		
+		function changeStyle(){
+			document.getElementById("demo_id").style.color = "red";
+		}
+		
+		//DOM EVENTS -  CLICK, MOUSEEVENT, KEYBOARD, ONLOAD, ONFOCUS
+		function onTextClick(element){
+			element.innerHTML = "Text has been changed!!!";
+			console.log(element);
+		}
+		
+		// DOM NODES - We can create new nodes (HTML elements) at runtime
+		/* 
+			In DOM everything is a node. 
+			The document object is the root node of the HTML document and the "owner" of all other nodes:
+			Types of Node : element nodes, text nodes, attribute nodes, and comment nodes
+		*/
+		
+		function addLabel(){
+			var para=document.createElement("p");
+			var node=document.createTextNode("This is new.");
+			var attr = document.createAttribute("id");
+			attr.value = "test_id";
+			para.setAttributeNode(attr);
+			
+			para.appendChild(node);
+			
+			var element=document.getElementById("div1");
+			element.appendChild(para);
+			
+			//console.log("P tag id attribute value:"+para.getAttributeNode("id").value);
+		}
+		
+		function removeLabel(element){
+			var para = document.getElementById("div1");
+			var node = document.getElementById("removeP");
+			para.removeChild(node);
+			
+			
+		/*	var myNode = element.parentNode;
+			while (myNode.firstChild) {
+				myNode.removeChild(myNode.firstChild);
+			}*/
+		}
+			
+</script>
+</head>
+<body >
+	<input type="button" value="Show 2D Array" onclick="show2DArray()" />
+	
+	<input type="button" value="View message" onclick="message()" />
+	<p>Please input a number between 5 and 10:</p>
+	<input id="demo" type="text">
+	<button type="button" onclick="myFunction()">Test Input</button>
+	<p id="mess"></p>
+	
+	<p id="demo_id">Testing...</p>
+	<input type="button" value="Change Data" onclick="changePara('Testing Done')" />
+	
+	<input id="btn" type="button" value="Change Attr" onclick="changeAttr()" />
+	<input type="button" value="Change Color" onclick="changeStyle()" />
+	
+	<p onclick="this.innerHTML='Ooops!'">Click on this text!</p>
+	<p id="eventId" onclick="onTextClick(this)">Click on this text!</p>
+	
+	<div id="eventId1" onclick="onTextClick(this)">Click on Here also!</div>
+	
+	
+	<div id="div1">
+		<input type="button" value="ADD LABEL" onclick="addLabel()" />
+		<p id="removeP">This is para to remove..</p>
+		<input type="button" value="REMOVE LABEL" onclick="removeLabel(this)" />
+	</div>
+	
+</body>
+</html>
