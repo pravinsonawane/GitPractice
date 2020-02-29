@@ -32,5 +32,10 @@
 ("git config --global user.useConfigOnly true"); // Force to use repo config instead of global
 ("");
 // For remote branches
-("git push github --delete branch_name"); // Delete remote branch
-(""); // delete local branches of deleted remote branches
+("git push remote_name --delete branch_name"); // Delete remote branch
+("git fetch remote_name --prune "); // delete local branches of deleted remote branches
+// Updating from Upstream Repo
+("git fetch remote_name");
+("git merge remote_name/branch_name");
+("git pull"); // Uses above 2 commands fetch and merge
+("git pull --rebase remote_name branch_name"); //
