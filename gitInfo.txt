@@ -1,0 +1,40 @@
+// Ignore files
+- Create .gitignore file
+// Excpetion in .gitignore file
+*.txt
+!imp.text  // Means all .txt should get Ignore expcept imp.txt file
+
+// Ignore file that have already been committed to a git repository
+git rm --cached file_name
+
+##Git diff
+git diff // Shosws diffenrce in working branch
+git diff 234der..dr345 // show diffenrce between 2 commits
+git diff branch1..branch2 // show diffenrce between 2 branches
+git diff HEAD // Show both staged and unstaged changes
+git diff filename // Show diff for particuar filename or folder name
+git diff HEAD^ HEAD // Between current version and last version
+
+## Undoing (Return to previous commit)
+git checkout commit_number
+git checkout --soft commit_number // Rollback to previous commit while keeping the changes
+git checkout --hard commit_number // Parmanentely discard any changes made after a specific commit
+git checkout --hard Head // Parmanentely discard any changes made after last commit
+
+## Undoing changes for 
+git checkout -- file.txt // Undo chages to a file. For folder too.
+git checkout -- . // Used all file paths, recursively from the current directory
+git reset --hard // Undo changes added to the index
+git reset HEAD~2 // Unwind last 2 commits
+git stash // Use this command instead of above operations
+git stash pop
+git stash drop
+ 
+## Revert some existing commits
+git revert HEAD~1 and git push  // NOw remote won't have our latest changes
+git revert HEAD~1
+    > after new changes done
+git add . . git commit and then git push after changes
+
+
+

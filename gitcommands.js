@@ -28,7 +28,6 @@
   "git config --global --remove-section user.name",
   "git config --global --remove-section user.email",
   "git config --global user.useConfigOnly true", // Force to use repo config instead of global
-  "",
   // For remote branches
   "git push remote_name --delete branch_name", // Delete remote branch
   "git fetch remote_name --prune ", // delete local branches of deleted remote branches
@@ -42,4 +41,4 @@
   "git remote rename origin github", // Rename remote repo_name
   // Staging
   "git add .",
-  "git add";
+  "git add -i", // Interactive 
